@@ -5,13 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#141312">
 <meta name="robots" content="index,follow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-5s68sG0mE/EXjyaT+pRdcWSlxUyNyebJyIv1gIYDcjU=' 'sha256-ZADWDz+fh916qcnqajaI8c86AGOaeafuxSnIgAMs+Rw=' 'sha256-/NpNihN7b+Q0+upw49uDL23goSb94skKEg3Mz0Ro5c8='; style-src-elem 'sha256-58esKF4bhEsxXmBqqJ5hxH8aQgPHIV8fJbQxFcH6Jok=' 'sha256-61lqpST8r9VMXrMLHgKXEAAggb72r5qGavgEJ57IpY8=' https://fonts.googleapis.com; style-src-attr 'unsafe-inline'; img-src 'self' data:; font-src https://fonts.gstatic.com; media-src 'self'; connect-src 'none'; frame-src 'none'; object-src 'none'; worker-src 'none'; manifest-src 'self'; base-uri 'none'; form-action 'none'; require-trusted-types-for 'script'; trusted-types 'none'">
 <meta property="og:type" content="website"><meta property="og:title" content="ANZA Wedding"><meta property="og:description" content="Fotografia e filmes de casamento em Rio Verde, Goiás, e em todo o Brasil."><meta property="og:image" content="thumb.jpg">
 <style>html{background:#141312}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
-</head>
-<body>
+<script>if(top!==self){try{top.location.replace(self.location.href)}catch(e){}document.documentElement.hidden=true}</script>
 <title>ANZA Wedding</title>
-<link rel="artifact-thumbnail" href="thumb.jpg">
-<meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="ANZA Wedding: fotografia e filmes de casamento em Rio Verde, Goiás, e em todo o Brasil. Veja o portfólio por nicho e peça seu orçamento pelo WhatsApp.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -375,7 +374,15 @@ html{-webkit-tap-highlight-color:transparent}
 .lbn:hover,.lbx:hover{scale:1.12}.lbx:hover{rotate:90deg}
 @media(hover:hover) and (pointer:fine) and (min-width:701px){.stage{overflow:hidden}#lbImg{cursor:zoom-in}#lbImg.zoomed{transform:scale(1.9);cursor:zoom-out}}
 @media(prefers-reduced-motion:reduce){.rvon .rv[data-rv]:not(.in),.rvon .card.rv:not(.in){opacity:1;transform:none;filter:none;clip-path:none}.rvon .pan:not(.in) img{clip-path:none}.rvon .card:not(.in) img{transform:none}.menu>*{opacity:1;translate:none}.dots{display:none}.eyebrow::before{width:34px;margin-right:.9rem}.nh::after{scale:1}.rvon .map:not(.in) .streets,.rvon .map:not(.in) .pin,.rvon .map:not(.in) .mlabel{opacity:1}.rvon .map:not(.in) .river{stroke-dashoffset:0}.chk circle,.chk path{stroke-dashoffset:0}}
+/* tela travada no celular: sem arrastar para os lados e sem efeito elástico */
+html{overflow-x:clip;overscroll-behavior:none;touch-action:pan-y pinch-zoom;-webkit-text-size-adjust:100%}
+body{overscroll-behavior:none;max-width:100%}
+.chips{overscroll-behavior:contain;touch-action:pan-x pan-y}
+/* fotos: sem arrastar, sem selecionar, sem menu "salvar imagem" no toque longo */
+.card img,#lbImg,.slides img,.cols img,.bgrows img,.pan img{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
 </style>
+</head>
+<body>
 <script>try{document.documentElement.classList.add("js");if(!sessionStorage.getItem("anza-intro")&&!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("intro-on")}catch(e){}</script>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -743,19 +750,35 @@ safe(()=>{
   const form=$("#f"),st=$("#st"),done=$("#done"),doneA=$("#doneA");
   const today=new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);
   form.elements.data.min=today;
-  const clean=s=>String(s).normalize("NFKC").replace(/[\u0000-\u001F\u007F<>`]/g," ").replace(/\s+/g," ").trim();
+  // normaliza (NFKC desfaz "<" em largura total), tira controle, invisíveis, bidi e símbolos de marcação
+  const clean=s=>String(s).normalize("NFKC").replace(/[\u0000-\u001F\u007F-\u009F\u200B-\u200F\u2028-\u202E\u2060-\u206F\uFEFF<>`{}\\|]/g," ").replace(/\s+/g," ").trim();
+  const LINK=/(https?:|www\.|\b[\w-]+\.(com|net|org|ru|xyz|top|click|link|info|biz|site|online|shop|app)\b|bit\.ly|t\.me|wa\.me)/i;
   const rules={
-    nome:x=>(x.length>=2&&x.length<=80&&/^[\p{L}\p{M}'’ .-]+$/u.test(x))||"Informe seu nome, usando apenas letras.",
+    nome:x=>(x.length>=2&&x.length<=80&&/^[\p{L}\p{M}'’ .-]+$/u.test(x)&&!LINK.test(x))||"Informe seu nome, usando apenas letras.",
     email:x=>(x.length<=120&&/^[^\s@]{1,64}@[^\s@.]+(\.[^\s@.]+)+$/.test(x))||"Informe um e-mail válido.",
     data:x=>!x||(/^\d{4}-\d{2}-\d{2}$/.test(x)&&x>=today)||"Escolha uma data futura.",
-    msg:x=>(x.length>=10&&x.length<=600)||"Escreva entre 10 e 600 caracteres."
+    msg:x=>x.length<10||x.length>600?"Escreva entre 10 e 600 caracteres.":LINK.test(x)?"Por segurança, não coloque links aqui. Conte a ideia e a ANZA responde no WhatsApp.":true
   };
+  // sinais de pessoa de verdade: eventos confiáveis, tempo de preenchimento e limite de envios
+  const RK="anza-rl",WIN=36e5,MAXN=5,GAP=15e3;let t1=0,human=0,locked=false,mem=[];
+  const mark=e=>{if(e.isTrusted){t1||(t1=performance.now());human++}};
+  ["input","keydown","pointerdown","change"].forEach(t=>form.addEventListener(t,mark,{passive:true}));
+  const sent=()=>{let a=mem;try{a=JSON.parse(localStorage.getItem(RK)||"[]")}catch(_){}const n=Date.now();return(Array.isArray(a)?a:[]).filter(x=>Number.isFinite(x)&&n-x<WIN).slice(-MAXN)};
+  const hit=()=>{const a=sent();a.push(Date.now());mem=a;try{localStorage.setItem(RK,JSON.stringify(a))}catch(_){}};
+  const stop=m=>{st.textContent=m};
   form.addEventListener("submit",e=>{
-    e.preventDefault();if(form.elements.site.value)return;
+    e.preventDefault();
+    if(locked)return;
+    if(form.elements.site.value){locked=true;return}
     let ok=true;const d={};
     for(const k in rules){const el=form.elements[k];d[k]=clean(el.value);const r=rules[k](d[k]);$("#e-"+k).textContent=r===true?"":r;el.setAttribute("aria-invalid",String(r!==true));if(r!==true)ok=false}
     const c=form.elements.ok.checked;$("#e-ok").textContent=c?"":"Marque a caixa para continuar.";if(!c)ok=false;
     if(!ok){st.textContent="Corrija os campos indicados.";form.querySelectorAll("[aria-invalid=true]").forEach(x=>{const l=x.closest("label");if(l){l.classList.remove("shake");void l.offsetWidth;l.classList.add("shake")}});return}
+    if(!e.isTrusted||navigator.webdriver===true||human<3){stop("Não foi possível confirmar que é uma pessoa. Use o botão do WhatsApp acima.");return}
+    if(performance.now()-t1<2000){stop("Calma, conferimos os dados. Tente enviar de novo em alguns segundos.");return}
+    const prev=sent();
+    if(prev.length>=MAXN||(prev.length&&Date.now()-prev[prev.length-1]<GAP)){stop("Muitas tentativas seguidas. Aguarde um pouco ou chame direto no WhatsApp.");return}
+    hit();locked=true;
     doneA.href=waURL(`Olá, ANZA! Sou ${d.nome} (${d.email}). Data do casamento: ${d.data||"ainda a definir"}. ${d.msg}`);
     st.textContent="";form.hidden=true;done.classList.add("show");doneA.focus();
   });
@@ -765,6 +788,7 @@ safe(()=>{
 safe(()=>{
   const ck=$("#ck"),KEY="anza-consent";let saved=null;
   try{saved=localStorage.getItem(KEY)}catch(_){}
+  if(saved!=="accepted"&&saved!=="declined")saved=null;
   if(!saved){ck.hidden=false;root.classList.add("cb")}
   const choose=x=>{try{localStorage.setItem(KEY,x)}catch(_){}ck.hidden=true;root.classList.remove("cb")};
   $("#ckY").onclick=()=>choose("accepted");$("#ckN").onclick=()=>choose("declined");
@@ -850,8 +874,40 @@ safe(()=>{
     im.style.transformOrigin=`${Math.min(100,Math.max(0,(e.clientX-r.left)/r.width*100)).toFixed(1)}% ${Math.min(100,Math.max(0,(e.clientY-r.top)/r.height*100)).toFixed(1)}%`;
   });
 });
+/* 16. Segurança: só links permitidos, travas contra automação, fotos protegidas e aviso anti-golpe */
+safe(()=>{
+  const OK=[["wa.me","/"+CFG.wa],["www.instagram.com","/anza.wedding"],["www.youtube.com","/@anzaaudiovisual"],["github.com","/matheus1906-hash"],["www.google.com","/maps/"]];
+  const allowed=h=>{
+    if(h[0]==="#")return /^#[\w-]{1,40}$/.test(h);
+    let u;try{u=new URL(h)}catch(_){return false}
+    return u.protocol==="https:"&&!u.username&&!u.password&&!u.port&&OK.some(([d,p])=>u.hostname===d&&u.pathname.startsWith(p));
+  };
+  const guard=a=>{
+    const h=a.getAttribute("href");if(h===null)return;
+    if(!allowed(h)){a.removeAttribute("href");a.setAttribute("aria-disabled","true");console.warn("Link bloqueado por segurança.");return}
+    const t=a.getAttribute("target");
+    if(t&&t!=="_blank")a.removeAttribute("target");
+    if(a.target==="_blank"&&a.rel!=="noopener noreferrer")a.rel="noopener noreferrer";
+  };
+  $$("a[href]").forEach(guard);
+  const scan=n=>{if(n.nodeType!==1)return;if(n.matches("a[href]"))guard(n);n.querySelectorAll("a[href]").forEach(guard)};
+  new MutationObserver(ms=>ms.forEach(m=>m.type==="attributes"?guard(m.target):m.addedNodes.forEach(scan)))
+    .observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:["href","target"]});
+  // nenhuma ação de formulário/base injetada
+  $$("base,iframe,object,embed").forEach(n=>n.remove());
+});
+safe(()=>{
+  // fotos: bloqueia arrastar e menu de contexto sobre imagens (dificulta cópia automática; não é proteção absoluta)
+  const isImg=e=>e.target&&e.target.tagName==="IMG";
+  document.addEventListener("contextmenu",e=>{if(isImg(e))e.preventDefault()});
+  document.addEventListener("dragstart",e=>{if(isImg(e))e.preventDefault()});
+  // a página nunca rola para os lados
+  addEventListener("scroll",()=>{if(scrollX)scrollTo(0,scrollY)},{passive:true});
+  // aviso contra colar código no console (golpe de "self-XSS")
+  console.log("%cPARE!","color:#d33;font:700 40px sans-serif");
+  console.log("Esta área é para desenvolvedores. Se alguém pediu para você colar algo aqui, é golpe e pode dar acesso às suas contas.");
+});
 })();
 </script>
-
 </body>
 </html>
