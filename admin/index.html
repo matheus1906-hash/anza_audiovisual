@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#141312">
+<title>Painel ANZA</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<a class="skip" href="#main">Ir para o conteúdo</a>
+<header class="top">
+  <div class="brand"><span class="logo">ANZA</span><span class="sub">Painel de manutenção</span></div>
+  <div class="who">
+    <span class="email" id="who-email"></span><span class="badge" id="who-role"></span>
+    <a class="btn ghost" href="/" target="_blank" rel="noopener noreferrer">Ver o site</a>
+    <a class="btn ghost" href="/cdn-cgi/access/logout">Sair</a>
+  </div>
+</header>
+
+<div class="boot" id="boot" role="status">Carregando o painel…</div>
+
+<div class="shell" id="app" hidden>
+  <nav class="tabs" id="tabs" role="tablist" aria-label="Seções do painel">
+    <button role="tab" id="t-home" data-tab="home" type="button">Visão geral</button>
+    <button role="tab" id="t-manutencao" data-tab="manutencao" type="button">Manutenção</button>
+    <button role="tab" id="t-aviso" data-tab="aviso" type="button">Aviso no topo</button>
+    <button role="tab" id="t-contatos" data-tab="contatos" type="button">Contatos</button>
+    <button role="tab" id="t-fotos" data-tab="fotos" type="button">Fotos</button>
+    <button role="tab" id="t-historico" data-tab="historico" type="button">Histórico</button>
+    <button role="tab" id="t-avancado" data-tab="avancado" type="button" hidden>Avançado</button>
+  </nav>
+
+  <main id="main">
+    <div class="alert" id="conflict" role="alert" hidden>
+      <span>Outra pessoa salvou alterações antes de você. Recarregue para ver a versão mais recente.</span>
+      <button class="btn" id="reload" type="button">Recarregar</button>
+    </div>
+
+    <section class="panel" id="p-home" role="tabpanel" aria-labelledby="t-home" tabindex="0" hidden>
+      <h1>Visão geral</h1>
+      <div class="cards">
+        <article class="card"><h2>Site</h2><p class="big" id="h-site"></p><p class="mute" id="h-site-sub"></p><button class="btn" type="button" data-go="manutencao">Abrir manutenção</button></article>
+        <article class="card"><h2>Aviso no topo</h2><p class="big" id="h-banner"></p><p class="mute" id="h-banner-sub"></p><button class="btn" type="button" data-go="aviso">Editar aviso</button></article>
+        <article class="card"><h2>Fotos ocultas</h2><p class="big" id="h-photos"></p><p class="mute" id="h-photos-sub"></p><button class="btn" type="button" data-go="fotos">Gerenciar fotos</button></article>
+        <article class="card"><h2>Última alteração</h2><p class="big" id="h-last"></p><p class="mute" id="h-last-sub"></p><button class="btn" type="button" data-go="historico">Ver histórico</button></article>
+      </div>
+      <p class="note">Tudo o que você muda aqui vale para os visitantes em até 1 minuto (o Cloudflare leva um instante para espalhar a mudança pelo mundo). Nada é salvo até você clicar em <b>Salvar alterações</b>.</p>
+    </section>
+
+    <section class="panel" id="p-manutencao" role="tabpanel" aria-labelledby="t-manutencao" tabindex="0" hidden>
+      <h1>Manutenção</h1>
+      <p class="lead">Com a manutenção ligada, os visitantes veem uma página de aviso no lugar do site. Você e o desenvolvedor continuam vendo o site normal enquanto estiverem logados.</p>
+      <label class="switch"><input type="checkbox" role="switch" data-bind="maintenance.on"><span class="track" aria-hidden="true"></span><span>Colocar o site em manutenção</span></label>
+      <div class="field"><label for="m-title">Título da página</label><input id="m-title" data-bind="maintenance.title" maxlength="60" autocomplete="off"><span class="count" data-count="maintenance.title" data-max="60"></span><span class="err" data-err="maintenance.title" role="alert"></span></div>
+      <div class="field"><label for="m-msg">Mensagem</label><textarea id="m-msg" data-bind="maintenance.message" maxlength="300" rows="4"></textarea><span class="count" data-count="maintenance.message" data-max="300"></span><span class="err" data-err="maintenance.message" role="alert"></span></div>
+      <div class="preview maint" aria-label="Prévia da página de manutenção"><small>ANZA WEDDING</small><b id="pv-m-title"></b><span id="pv-m-msg"></span></div>
+      <p class="note">Visitantes recebem o código 503 (“volte mais tarde”), que não prejudica o Google. Não é possível colocar links nos textos, por segurança.</p>
+    </section>
+
+    <section class="panel" id="p-aviso" role="tabpanel" aria-labelledby="t-aviso" tabindex="0" hidden>
+      <h1>Aviso no topo</h1>
+      <p class="lead">Uma faixa fina no topo do site, para recados rápidos: feriado, agenda fechada, promoção.</p>
+      <label class="switch"><input type="checkbox" role="switch" data-bind="banner.on"><span class="track" aria-hidden="true"></span><span>Mostrar o aviso</span></label>
+      <div class="field"><label for="b-text">Texto do aviso</label><input id="b-text" data-bind="banner.text" maxlength="140" autocomplete="off"><span class="count" data-count="banner.text" data-max="140"></span><span class="err" data-err="banner.text" role="alert"></span></div>
+      <div class="preview bar" aria-label="Prévia do aviso"><span id="pv-banner"></span></div>
+    </section>
+
+    <section class="panel" id="p-contatos" role="tabpanel" aria-labelledby="t-contatos" tabindex="0" hidden>
+      <h1>Contatos</h1>
+      <p class="lead">Atualizam os botões, links e números exibidos em todo o site.</p>
+      <div class="field"><label for="c-wa">WhatsApp (com DDI e DDD)</label><input id="c-wa" data-bind="contacts.wa" inputmode="numeric" autocomplete="off" maxlength="24"><span class="hint" id="pv-wa"></span><span class="err" data-err="contacts.wa" role="alert"></span></div>
+      <div class="field"><label for="c-ig">Instagram</label><input id="c-ig" data-bind="contacts.instagram" autocomplete="off" maxlength="31"><span class="hint" id="pv-ig"></span><span class="err" data-err="contacts.instagram" role="alert"></span></div>
+      <div class="field"><label for="c-yt">YouTube (canal com @)</label><input id="c-yt" data-bind="contacts.youtube" autocomplete="off" maxlength="51"><span class="hint" id="pv-yt"></span><span class="err" data-err="contacts.youtube" role="alert"></span></div>
+      <p class="note">Confira o número antes de salvar: ele recebe todos os pedidos de orçamento.</p>
+    </section>
+
+    <section class="panel" id="p-fotos" role="tabpanel" aria-labelledby="t-fotos" tabindex="0" hidden>
+      <h1>Fotos do portfólio</h1>
+      <p class="lead">Toque numa foto para ocultá-la ou mostrá-la no site. Ocultar tira a foto da galeria, do visualizador e do topo; o arquivo continua guardado.</p>
+      <div class="filters">
+        <div class="chips" id="f-niches" role="group" aria-label="Filtrar por nicho"></div>
+        <label class="inline"><input type="checkbox" id="f-hidden"> Só as ocultas</label>
+        <span class="count" id="f-count" role="status"></span>
+      </div>
+      <div class="grid" id="f-grid"></div>
+    </section>
+
+    <section class="panel" id="p-historico" role="tabpanel" aria-labelledby="t-historico" tabindex="0" hidden>
+      <h1>Histórico de alterações</h1>
+      <p class="lead">As últimas 100 mudanças: quando, quem e o quê.</p>
+      <div class="tablewrap"><table><thead><tr><th>Quando</th><th>Quem</th><th>O que mudou</th></tr></thead><tbody id="a-rows"></tbody></table></div>
+      <p class="note" id="a-empty" hidden>Nenhuma alteração registrada ainda.</p>
+    </section>
+
+    <section class="panel" id="p-avancado" role="tabpanel" aria-labelledby="t-avancado" tabindex="0" hidden>
+      <h1>Avançado</h1>
+      <p class="lead">Só o desenvolvedor vê esta aba, e o servidor também recusa a dona nestas funções.</p>
+      <h2>Diagnóstico</h2>
+      <button class="btn" id="d-run" type="button">Verificar agora</button>
+      <dl class="diag" id="d-out"></dl>
+      <h2>Backup da configuração</h2>
+      <div class="row"><button class="btn" id="x-export" type="button">Baixar JSON</button></div>
+      <div class="field"><label for="x-json">Restaurar a partir de um JSON</label><textarea id="x-json" rows="6" spellcheck="false" autocomplete="off"></textarea><span class="err" id="x-err" role="alert"></span></div>
+      <button class="btn" id="x-import" type="button">Carregar no formulário</button>
+      <p class="note">Carregar só preenche o formulário. O servidor valida tudo de novo quando você clicar em <b>Salvar alterações</b>.</p>
+    </section>
+  </main>
+</div>
+
+<div class="savebar" id="savebar" hidden>
+  <span id="sb-text" role="status"></span>
+  <span class="sb-btns"><button class="btn ghost" id="sb-discard" type="button">Descartar</button><button class="btn fill" id="sb-save" type="button">Salvar alterações</button></span>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<script src="admin.js" defer></script>
+</body>
+</html>

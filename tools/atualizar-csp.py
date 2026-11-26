@@ -5,7 +5,8 @@ Uso (na pasta do projeto):  python3 tools/atualizar-csp.py
 
 Por que existe: a CSP deste site não aceita scripts/estilos inline "soltos". Ela só executa os blocos <script> e <style>
 cujo hash SHA-256 está listado. Mudou uma vírgula no bloco? O hash muda e o navegador bloqueia o bloco até você rodar isto.
-Atualiza o index.html (meta CSP), o _headers (Netlify/Cloudflare Pages) e o vercel.json.
+Atualiza o index.html (meta CSP), o _headers (Cloudflare Pages/Netlify) e o vercel.json (o _headers e o vercel.json repetem a CSP em / e /index.html).
+A CSP do painel (/admin) não usa hash: ela só aceita arquivos do próprio site, então não precisa ser atualizada.
 """
 import base64, hashlib, pathlib, re, sys
 
@@ -27,8 +28,8 @@ for nome in ("index.html", "_headers", "vercel.json"):
         continue
     antes = f.read_text(encoding="utf-8")
     troca = lambda novo: (lambda m: m.group(1) + novo + (" " if m.group(2).endswith(" ") else ""))
-    depois = re.sub(r"(script-src )((?:'sha256-[^']+' ?)+)", troca(scripts), antes, count=1)
-    depois = re.sub(r"(style-src-elem )((?:'sha256-[^']+' ?)+)", troca(estilos), depois, count=1)
+    depois = re.sub(r"(script-src )((?:'sha256-[^']+' ?)+)", troca(scripts), antes)
+    depois = re.sub(r"(style-src-elem )((?:'sha256-[^']+' ?)+)", troca(estilos), depois)
     if depois != antes:
         f.write_text(depois, encoding="utf-8"); mudou = True
         print("atualizado:", nome)

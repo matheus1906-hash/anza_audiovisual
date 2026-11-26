@@ -1,6 +1,6 @@
-# Cabeçalhos de segurança (Netlify e Cloudflare Pages). Gerado por tools/make_repo.py: não edite à mão.
+# Cabeçalhos de segurança (Cloudflare Pages e Netlify). Gerado por tools/make_repo.py: não edite à mão.
+# Regras que casam se SOMAM; por isso a CSP do site fica só em / e /index.html e a do painel só em /admin.
 /*
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-5s68sG0mE/EXjyaT+pRdcWSlxUyNyebJyIv1gIYDcjU=' 'sha256-ZADWDz+fh916qcnqajaI8c86AGOaeafuxSnIgAMs+Rw=' 'sha256-/NpNihN7b+Q0+upw49uDL23goSb94skKEg3Mz0Ro5c8='; style-src-elem 'sha256-58esKF4bhEsxXmBqqJ5hxH8aQgPHIV8fJbQxFcH6Jok=' 'sha256-61lqpST8r9VMXrMLHgKXEAAggb72r5qGavgEJ57IpY8=' https://fonts.googleapis.com; style-src-attr 'unsafe-inline'; img-src 'self' data:; font-src https://fonts.gstatic.com; media-src 'self'; connect-src 'none'; frame-src 'none'; object-src 'none'; worker-src 'none'; manifest-src 'self'; base-uri 'none'; form-action 'none'; require-trusted-types-for 'script'; trusted-types 'none'; frame-ancestors 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
@@ -10,7 +10,19 @@
   Cross-Origin-Resource-Policy: same-origin
   X-Permitted-Cross-Domain-Policies: none
   X-DNS-Prefetch-Control: off
-/index.html
+/
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-5s68sG0mE/EXjyaT+pRdcWSlxUyNyebJyIv1gIYDcjU=' 'sha256-ZADWDz+fh916qcnqajaI8c86AGOaeafuxSnIgAMs+Rw=' 'sha256-/moE5mVt2NDFGlExJnVXmG+DUqCbZiE8e20TSRhQA5s='; style-src-elem 'sha256-58esKF4bhEsxXmBqqJ5hxH8aQgPHIV8fJbQxFcH6Jok=' 'sha256-ff6KgTAt5wTan5ufVLVoUakccXgSrTYPWEIX8/t6ok4=' https://fonts.googleapis.com; style-src-attr 'unsafe-inline'; img-src 'self' data:; font-src https://fonts.gstatic.com; media-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; worker-src 'none'; manifest-src 'self'; base-uri 'none'; form-action 'none'; require-trusted-types-for 'script'; trusted-types 'none'; frame-ancestors 'none'; upgrade-insecure-requests
   Cache-Control: no-cache
+/index.html
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-5s68sG0mE/EXjyaT+pRdcWSlxUyNyebJyIv1gIYDcjU=' 'sha256-ZADWDz+fh916qcnqajaI8c86AGOaeafuxSnIgAMs+Rw=' 'sha256-/moE5mVt2NDFGlExJnVXmG+DUqCbZiE8e20TSRhQA5s='; style-src-elem 'sha256-58esKF4bhEsxXmBqqJ5hxH8aQgPHIV8fJbQxFcH6Jok=' 'sha256-ff6KgTAt5wTan5ufVLVoUakccXgSrTYPWEIX8/t6ok4=' https://fonts.googleapis.com; style-src-attr 'unsafe-inline'; img-src 'self' data:; font-src https://fonts.gstatic.com; media-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; worker-src 'none'; manifest-src 'self'; base-uri 'none'; form-action 'none'; require-trusted-types-for 'script'; trusted-types 'none'; frame-ancestors 'none'; upgrade-insecure-requests
+  Cache-Control: no-cache
+/admin
+  Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'; require-trusted-types-for 'script'; trusted-types 'none'; upgrade-insecure-requests
+  Cache-Control: no-store
+  X-Robots-Tag: noindex, nofollow, noarchive
+/admin/*
+  Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'; require-trusted-types-for 'script'; trusted-types 'none'; upgrade-insecure-requests
+  Cache-Control: no-store
+  X-Robots-Tag: noindex, nofollow, noarchive
 /img/*
   Cache-Control: public, max-age=31536000, immutable
