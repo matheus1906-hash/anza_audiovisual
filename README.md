@@ -16,7 +16,7 @@ Site institucional da ANZA Wedding, produtora de fotos e filmes de casamento em 
 
 ## O que tem no site
 
-- **Portfólio por nicho:** Cerimônia, Festa, Retratos, Detalhes e Ensaios, com menu fixo e lightbox (setas, teclado e deslize no celular).
+- **Portfólio por nicho (89 fotos):** Making of, Cerimônia, Retratos, Família e amigos, Festa, Detalhes e Ensaios, com menu fixo e lightbox (setas, teclado e deslize no celular).
 - **Imagens otimizadas:** cada foto em 480w e 800w (WebP) e o original em JPEG (`srcset`), com carregamento preguiçoso e placeholder.
 - **Topo animado:** colunas de fotos no PC e apresentação em tela cheia no celular. Vídeo opcional pela variável `CFG.video` no script.
 - **Filmes:** seção do YouTube com fotos passando ao fundo.
@@ -30,7 +30,8 @@ Site institucional da ANZA Wedding, produtora de fotos e filmes de casamento em 
 
 ```
 index.html   página única (HTML, CSS e JavaScript)
-img/         fotos otimizadas (480w, 800w e original)
+img/         fotos otimizadas (480w, 800w e original), nomeadas por nicho: making-of-1, cerimonia-1...
+thumb.jpg    imagem de compartilhamento (og:image)
 docs/        imagens de prévia usadas neste README
 _headers     CSP, X-Frame-Options e demais cabeçalhos (Netlify / Cloudflare Pages)
 .nojekyll    para o GitHub Pages servir todos os arquivos
