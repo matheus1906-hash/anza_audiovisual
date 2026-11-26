@@ -41,7 +41,7 @@ functions/      servidor do painel e da configuração (Cloudflare Pages Functio
 tests/          38 testes das funções: npm test
 _headers        CSP, X-Frame-Options e demais cabeçalhos (Cloudflare Pages / Netlify)
 _routes.json    quais caminhos passam pelas funções
-vercel.json     os mesmos cabeçalhos do site para a Vercel
+vercel.json     build (só o site), pasta de saída e cabeçalhos para a Vercel
 ADMIN.md        como instalar e usar o painel (Cloudflare Access, KV, variáveis)
 SECURITY.md     como o site e o painel se protegem, limites e checklist de quem administra
 tools/          atualizar-csp.py (hashes da CSP), build-pages.mjs (monta dist/) e dev-server.mjs (teste local)
@@ -55,7 +55,7 @@ docs/           imagens de prévia usadas neste README
 - **Cloudflare Pages (recomendado, necessário para o painel):** conecte este repositório com *Build command* `node tools/build-pages.mjs` e *Build output directory* `dist`. O `_headers` aplica os cabeçalhos de segurança. Para o painel, siga o passo a passo do [ADMIN.md](ADMIN.md).
 - **GitHub Pages:** Settings > Pages > Deploy from a branch > `main` / `(root)`. O site público funciona, mas o `_headers` é ignorado e o painel não existe.
 - **Netlify:** conecte o repositório. O `_headers` aplica os cabeçalhos; o painel não funciona.
-- **Vercel:** importe o repositório. O `vercel.json` aplica os cabeçalhos.
+- **Vercel:** importe o repositório e deixe as configurações como estão: o `vercel.json` já define o comando de build (`node tools/build-pages.mjs --public-only`), a pasta de saída (`dist`) e os cabeçalhos. Publica só o site, sem o painel.
 - **Hospedagem comum (Hostinger etc.):** envie `index.html` e a pasta `img` para o `public_html`.
 
 Para testar só o site: `python3 -m http.server 8000` e abra http://localhost:8000. Para testar o site com o painel (Access simulado): `npm run dev` e abra http://127.0.0.1:8788 (veja o [ADMIN.md](ADMIN.md)).

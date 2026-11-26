@@ -1,4 +1,6 @@
 {
+  "buildCommand": "node tools/build-pages.mjs --public-only",
+  "outputDirectory": "dist",
   "headers": [
     {
       "source": "/(.*)",
