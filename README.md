@@ -19,6 +19,7 @@ Site institucional da ANZA Wedding, produtora de fotos e filmes de casamento em 
 - **Portfólio por nicho (89 fotos):** Making of, Cerimônia, Retratos, Família e amigos, Festa, Detalhes e Ensaios, com menu fixo e lightbox (setas, teclado e deslize no celular).
 - **Imagens otimizadas:** cada foto em 480w e 800w (WebP) e o original em JPEG (`srcset`), com carregamento preguiçoso e placeholder.
 - **Topo animado:** colunas de fotos no PC e apresentação em tela cheia no celular. Vídeo opcional pela variável `CFG.video` no script.
+- **Logo:** disco claro com ANZA em preto e o floreio sob o Z, em SVG (nítida em qualquer tamanho), no menu, na abertura e no rodapé.
 - **Animações ao rolar e nas opções:** textos e fotos que entram por lados diferentes, cartas que se revelam em máscara e inclinam com o mouse, contadores de fotos, parallax no topo, faixa que acelera com a rolagem, menu de nichos com seletor deslizante, ondas nos cliques, menu do celular em cascata, zoom na foto ampliada e pontos de navegação laterais. Tudo é desligado com `prefers-reduced-motion`.
 - **Filmes:** seção do YouTube com fotos passando ao fundo.
 - **Contato:** formulário validado e sanitizado no navegador, que abre o WhatsApp com a mensagem pronta (nada é guardado).
@@ -64,6 +65,7 @@ Para testar só o site: `python3 -m http.server 8000` e abra http://localhost:80
 
 - **Contatos:** pelo painel (aba *Contatos*), sem mexer no código. O `index.html` guarda os valores originais (WhatsApp `5564981025380`, `instagram.com/anza.wedding`, `youtube.com/@anzaaudiovisual`) e a lista de links permitidos (seção 16 do script); os valores do painel prevalecem quando o servidor estiver no ar.
 - **Depois de editar o JS ou o CSS do `index.html`:** rode `python3 tools/atualizar-csp.py` para atualizar os hashes da CSP.
+- **Rolagem do mouse e do touchpad:** em `CFG.scroll` (no script do `index.html`): `speed` é a distância por giro da roda (1 = padrão do navegador; hoje 0,6) e `glide` é o tempo de deslize em segundos (hoje 0,22). Vale só para mouse/touchpad; toque, teclado e links ficam nativos, e `prefers-reduced-motion` desliga o efeito. Depois de editar, rode `python3 tools/atualizar-csp.py`.
 - **Vídeo do topo:** no script, em `CFG`, preencha `video:"caminho.mp4"` (MP4 curto e leve).
 - **Fotos:** troque os arquivos de `img/` mantendo os nomes e os tamanhos (480w, 800w e original).
 

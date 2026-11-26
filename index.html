@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#141312">
 <meta name="robots" content="index,follow">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-5s68sG0mE/EXjyaT+pRdcWSlxUyNyebJyIv1gIYDcjU=' 'sha256-ZADWDz+fh916qcnqajaI8c86AGOaeafuxSnIgAMs+Rw=' 'sha256-/moE5mVt2NDFGlExJnVXmG+DUqCbZiE8e20TSRhQA5s='; style-src-elem 'sha256-58esKF4bhEsxXmBqqJ5hxH8aQgPHIV8fJbQxFcH6Jok=' 'sha256-ff6KgTAt5wTan5ufVLVoUakccXgSrTYPWEIX8/t6ok4=' https://fonts.googleapis.com; style-src-attr 'unsafe-inline'; img-src 'self' data:; font-src https://fonts.gstatic.com; media-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; worker-src 'none'; manifest-src 'self'; base-uri 'none'; form-action 'none'; require-trusted-types-for 'script'; trusted-types 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-5s68sG0mE/EXjyaT+pRdcWSlxUyNyebJyIv1gIYDcjU=' 'sha256-ZADWDz+fh916qcnqajaI8c86AGOaeafuxSnIgAMs+Rw=' 'sha256-KMhD+ZVjMKUTvRqK+AcpxPwQYIeXotDIdsJZeMOTja4='; style-src-elem 'sha256-58esKF4bhEsxXmBqqJ5hxH8aQgPHIV8fJbQxFcH6Jok=' 'sha256-upGBHwnpGCT+nI4DkjVL2db5zfeH6tIehyn2k7fvYA4=' https://fonts.googleapis.com; style-src-attr 'unsafe-inline'; img-src 'self' data:; font-src https://fonts.gstatic.com; media-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; worker-src 'none'; manifest-src 'self'; base-uri 'none'; form-action 'none'; require-trusted-types-for 'script'; trusted-types 'none'">
 <meta property="og:type" content="website"><meta property="og:title" content="ANZA Wedding"><meta property="og:description" content="Fotografia e filmes de casamento em Rio Verde, Goiás, e em todo o Brasil."><meta property="og:image" content="thumb.jpg">
 <style>html{background:#141312}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>if(top!==self){try{top.location.replace(self.location.href)}catch(e){}document.documentElement.hidden=true}</script>
@@ -125,8 +125,11 @@ p{margin:0 0 1rem;max-width:62ch}
 @keyframes cue{0%{scale:0 1}50%{scale:1 1}100%{scale:1 1;opacity:0}}
 @media(min-width:900px){
  .hero::after{background:linear-gradient(90deg,var(--bg) 0,rgba(20,19,18,.88) 36%,rgba(20,19,18,.15) 68%,rgba(20,19,18,.0)),linear-gradient(180deg,rgba(20,19,18,.5),transparent 22%)}
- #heroMedia{left:44%}
- .hero h1{font-size:clamp(3.4rem,5.6vw,5.2rem)}
+ .hero{--hf:clamp(3.4rem,5.6vw,5.2rem);--tl:calc(max(0px,(100vw - 1240px)/2) + var(--gl));--tg:clamp(56px,var(--tl),150px)}
+ .hero{--hm:max(44vw,calc(var(--tl) + 6.3*var(--hf) + var(--tg) - 14px))}
+ #heroMedia{left:var(--hm)}
+ .hero-in{max-width:min(35rem,calc(var(--hm) + 38px - var(--tl) - var(--tg)))}
+ .hero h1{font-size:var(--hf)}
  .hero{align-items:center}
  .hero .wrap{padding-block:calc(var(--nav) + var(--bn,0px) + 2rem) 3rem}
 }
@@ -284,7 +287,7 @@ dialog#lb{border:0;padding:0;background:transparent;color:var(--ink);max-width:n
 @keyframes glow{50%{box-shadow:0 0 0 12px rgba(239,233,222,.14)}}
 html{-webkit-tap-highlight-color:transparent}
 /* revelar ao rolar, com variações de direção */
-.rv{transition:opacity 1s var(--ease),transform 1s var(--ease),filter 1s var(--ease),clip-path 1.4s var(--ease);transition-delay:var(--d,0s)}
+.rv{transition:opacity 1.25s var(--ease),transform 1.25s var(--ease),filter 1.25s var(--ease),clip-path 1.7s var(--ease);transition-delay:var(--d,0s)}
 .rvon .rv[data-rv=left]:not(.in){transform:translateX(-56px)}
 .rvon .rv[data-rv=right]:not(.in){transform:translateX(56px)}
 .rvon .rv[data-rv=zoom]:not(.in){transform:scale(.9)}
@@ -300,7 +303,7 @@ html{-webkit-tap-highlight-color:transparent}
 .nh::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,var(--gold),transparent 70%);scale:0 1;transform-origin:left;transition:scale 1.6s var(--ease) .25s}
 .nh.in::after{scale:1}
 /* cards: revelação em máscara, inclinação e brilho */
-.card.rv{transition:opacity .9s var(--ease),transform .9s var(--ease),clip-path 1.1s var(--ease);transition-delay:var(--d,0s)}
+.card.rv{transition:opacity 1.15s var(--ease),transform 1.15s var(--ease),clip-path 1.4s var(--ease);transition-delay:var(--d,0s)}
 .rvon .card.rv:not(.in){opacity:0;transform:translateY(54px) scale(.93);clip-path:inset(12% 8% 12% 8% round 10px)}
 .card.in{clip-path:inset(0 0 0 0 round 3px)}
 .rvon .card:not(.in) img{transform:scale(1.3)}
@@ -391,7 +394,7 @@ body{overscroll-behavior:none;max-width:100%}
 <script>try{document.documentElement.classList.add("js");if(!sessionStorage.getItem("anza-intro")&&!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("intro-on")}catch(e){}</script>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
- <symbol id="logo" viewBox="0 0 100 100"><circle cx="50" cy="50" r="47" fill="none" stroke="currentColor" stroke-width="1.2"/><text x="50" y="55" text-anchor="middle" font-family="Cormorant Garamond,Georgia,serif" font-size="25" letter-spacing="3" fill="currentColor">ANZA</text><text x="50" y="70" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" letter-spacing="3" fill="currentColor">WEDDING</text></symbol>
+ <symbol id="logo" viewBox="0 0 100 100"><circle cx="50" cy="50" r="47" fill="#f4efeb"/><g transform="translate(50 50) scale(0.07381) translate(-608 -277)" fill="#0c0b0a"><path d="M205.9 84L261.3 84L173.7 318L116.8 330Z"/><path d="M92 362L156 348L150 394L146 438L66 438L76 408Z"/><path d="M266.3 90.8L355.3 418.8L346.7 421.2L257.7 93.2Z"/><path d="M24 354C58 347 102 339 150 334L152 344C108 349 60 355 24 354Z"/><path d="M322 438L352 411L373 438Z"/><path d="M378 438L388 414L434 438Z"/><path d="M372.9 84L430 84L624 438L566.6 438Z"/><path d="M379.5 90L379.5 424L370.5 424L370.5 90Z"/><path d="M602.5 96L602.5 424L593.5 424L593.5 96Z"/><path d="M580 84L644 84L644 98L620 112L606 136L596 126Z"/><path d="M842.2 84L898.8 84L704.2 438L645.6 438Z"/><path d="M660 84L866 84L866 95L674 95L674 140L660 140Z"/><path d="M652 430C660 430.3 683.7 430.8 700 432C716.3 433.2 733.3 434.8 750 437C766.7 439.2 783.3 442.5 800 445.4C816.7 448.3 833.3 450.7 850 454.6C866.7 458.5 883.3 464.7 900 468.7C916.7 472.7 933.3 475.1 950 478.7C966.7 482.3 983.3 487.4 1000 490.1C1016.7 492.8 1033.3 494.8 1050 495.1C1066.7 495.5 1085 495.2 1100 492.2C1115 489.2 1129.7 481.6 1140 477.2C1150.3 472.8 1158.3 467.9 1162 466Q1170 468 1166 472C1163.7 476.7 1156.3 492.9 1152 500C1147.7 507.1 1148.7 510.5 1140 514.6C1131.3 518.7 1115 522.9 1100 524.7C1085 526.5 1066.7 525.8 1050 525.3C1033.3 524.8 1016.7 524.4 1000 521.7C983.3 519 966.7 513.7 950 509.2C933.3 504.7 916.7 500.4 900 494.9C883.3 489.4 866.7 482.3 850 476.3C833.3 470.3 816.7 463.7 800 459C783.3 454.3 766.7 450.8 750 448C733.3 445.2 716.3 443.3 700 442C683.7 440.7 660 440.3 652 440Z"/><path d="M966.4 84L1022.1 84L1109.9 326L1063.4 340Z"/><path d="M1088 384L1122 372L1146 404L1170 438L1086 438Z"/><path d="M969.3 93.3L872.3 421.3L863.7 418.7L960.7 90.7Z"/><path d="M846 438L872 411L897 438Z"/></g></symbol>
  <linearGradient id="igg" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#feda75"/><stop offset=".28" stop-color="#fa7e1e"/><stop offset=".52" stop-color="#d62976"/><stop offset=".76" stop-color="#962fbf"/><stop offset="1" stop-color="#4f5bd5"/></linearGradient>
  <symbol id="i-ig" viewBox="0 0 24 24"><path fill="url(#igg)" d="M7.03.084c-1.277.06-2.149.264-2.91.563a5.9 5.9 0 0 0-2.124 1.388 5.9 5.9 0 0 0-1.38 2.127C.321 4.926.12 5.8.064 7.076s-.069 1.688-.063 4.947.021 3.667.083 4.947c.061 1.277.264 2.149.563 2.911.308.789.72 1.457 1.388 2.123a5.9 5.9 0 0 0 2.129 1.38c.763.295 1.636.496 2.913.552 1.278.056 1.689.069 4.947.063s3.668-.021 4.947-.082c1.28-.06 2.147-.265 2.91-.563a5.9 5.9 0 0 0 2.123-1.388 5.9 5.9 0 0 0 1.38-2.129c.295-.763.496-1.636.551-2.912.056-1.28.07-1.69.063-4.948-.006-3.258-.02-3.667-.081-4.947-.06-1.28-.264-2.148-.564-2.911a5.9 5.9 0 0 0-1.387-2.123 5.86 5.86 0 0 0-2.128-1.38C19.074.322 18.202.12 16.924.066 15.647.009 15.236-.006 11.977 0S8.31.021 7.03.084m.14 21.693c-1.17-.05-1.805-.245-2.228-.408a3.7 3.7 0 0 1-1.382-.895 3.7 3.7 0 0 1-.9-1.378c-.165-.423-.363-1.058-.417-2.228-.06-1.264-.072-1.644-.08-4.848-.006-3.204.006-3.583.061-4.848.05-1.169.246-1.805.408-2.228.216-.561.477-.96.895-1.382a3.7 3.7 0 0 1 1.379-.9c.423-.165 1.057-.361 2.227-.417 1.265-.06 1.644-.072 4.848-.08 3.203-.006 3.583.006 4.85.062 1.168.05 1.804.244 2.227.408.56.216.96.475 1.382.895s.681.817.9 1.378c.165.422.362 1.056.417 2.227.06 1.265.074 1.645.08 4.848.005 3.203-.006 3.583-.061 4.848-.051 1.17-.245 1.805-.408 2.23-.216.56-.477.96-.896 1.38a3.7 3.7 0 0 1-1.378.9c-.422.165-1.058.362-2.226.418-1.266.06-1.645.072-4.85.079s-3.582-.006-4.848-.06m9.783-16.192a1.44 1.44 0 1 0 1.437-1.442 1.44 1.44 0 0 0-1.437 1.442M5.839 12.012a6.161 6.161 0 1 0 12.323-.024 6.162 6.162 0 0 0-12.323.024M8 12.008A4 4 0 1 1 12.008 16 4 4 0 0 1 8 12.008"/></symbol>
  <symbol id="i-yt" viewBox="0 0 24 24"><path d="M23.498 6.186a3.02 3.02 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.02 3.02 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.02 3.02 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.02 3.02 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></symbol>
@@ -573,7 +576,7 @@ const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
 const FINE=matchMedia("(hover:hover) and (pointer:fine)").matches;
 const WIDE=matchMedia("(min-width:900px)");
 const root=document.documentElement;
-const CFG={wa:"5564981025380",ig:"anza.wedding",yt:"@anzaaudiovisual",video:"",api:"/api/config"};
+const CFG={wa:"5564981025380",ig:"anza.wedding",yt:"@anzaaudiovisual",video:"",api:"/api/config",scroll:{speed:.6,glide:.22}}; // scroll.speed: distância por giro da roda (1 = padrão do navegador); scroll.glide: segundos de deslize
 const HIDDEN=new Set(),vis=n=>!HIDDEN.has(W[n].s);
 const src=(w,k)=>`img/${w.s}-${k}.${k==="full"?"jpg":"webp"}`;
 const sset=w=>`${src(w,480)} 480w, ${src(w,800)} 800w, ${src(w,"full")} ${w.w}w`;
@@ -971,6 +974,39 @@ safe(()=>{
     .then(r=>{if(!r.ok||!(r.headers.get("content-type")||"").includes("application/json"))throw new Error("api");return r.text()})
     .then(t=>{if(t.length>20000)throw new Error("grande");apply(JSON.parse(t))})
     .catch(()=>{}); // sem painel ou sem rede, o site segue com o conteúdo original
+});
+/* 18. Rolagem da roda do mouse e do touchpad: mais curta e com deslize suave (toque, teclado e links ficam como estão) */
+safe(()=>{
+  if(RM||!matchMedia("(hover:hover) and (pointer:fine)").matches)return;
+  const K=CFG.scroll,speed=Math.min(1.5,Math.max(.2,+K.speed||.6)),glide=Math.min(.6,Math.max(.05,+K.glide||.22));
+  let cur=scrollY,tgt=scrollY,raf=0,last=0,mine=-1;
+  const limit=()=>Math.max(0,root.scrollHeight-innerHeight);
+  const own=el=>{ // quem tem rolagem própria (caixa de texto, lista) continua nativo
+    for(let e=el;e&&e!==document.body&&e!==root;e=e.parentElement){
+      if(e.nodeType!==1)continue;
+      if(/(auto|scroll)/.test(getComputedStyle(e).overflowY)&&e.scrollHeight>e.clientHeight+1)return true;
+    }return false};
+  const step=t=>{
+    const dt=Math.min(.05,(t-last)/1000||.016);last=t;
+    cur+=(tgt-cur)*(1-Math.exp(-dt/glide));
+    if(Math.abs(tgt-cur)<.4)cur=tgt;
+    mine=Math.round(cur);scrollTo({top:cur,left:0,behavior:"instant"});
+    raf=cur===tgt?0:requestAnimationFrame(step);
+  };
+  addEventListener("wheel",e=>{
+    if(e.defaultPrevented||e.ctrlKey||e.shiftKey||e.deltaY===0||Math.abs(e.deltaX)>Math.abs(e.deltaY))return;
+    if(document.body.classList.contains("lock")||$("dialog[open]")||own(e.target))return;
+    e.preventDefault();
+    let d=e.deltaY*(e.deltaMode===1?32:e.deltaMode===2?innerHeight:1);
+    d=Math.max(-150,Math.min(150,d))*speed;
+    if(!raf)cur=tgt=scrollY;
+    tgt=Math.max(0,Math.min(limit(),tgt+d));
+    if(!raf){last=performance.now();raf=requestAnimationFrame(step)}
+  },{passive:false});
+  addEventListener("scroll",()=>{ // rolou por outro meio (barra, teclado, link): cancela o deslize e acompanha
+    if(raf&&Math.abs(scrollY-mine)>3){cancelAnimationFrame(raf);raf=0}
+    if(!raf)cur=tgt=scrollY;
+  },{passive:true});
 });
 })();
 </script>
