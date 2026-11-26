@@ -1,6 +1,19 @@
 # anza_audiovisual
 Site institucional da ANZA Wedding, produtora de fotos e filmes de casamento em Rio Verde, GO. Portfólio por nicho com lightbox, seção de filmes no YouTube, contato via WhatsApp, mapa e LGPD. HTML, CSS e JavaScript puros, responsivo (PC e celular).
 
+## Prévia
+
+![Topo do site no computador](docs/preview-desktop.jpg)
+
+![Portfólio por nicho](docs/preview-portfolio.jpg)
+
+![Seção de localização com o mapa de Rio Verde, GO](docs/preview-mapa.jpg)
+
+<p>
+  <img src="docs/preview-mobile-topo.jpg" alt="Topo do site no celular" width="260">
+  <img src="docs/preview-mobile-galeria.jpg" alt="Galeria no celular" width="260">
+</p>
+
 ## O que tem no site
 
 - **Portfólio por nicho:** Cerimônia, Festa, Retratos, Detalhes e Ensaios, com menu fixo e lightbox (setas, teclado e deslize no celular).
@@ -18,6 +31,7 @@ Site institucional da ANZA Wedding, produtora de fotos e filmes de casamento em 
 ```
 index.html   página única (HTML, CSS e JavaScript)
 img/         fotos otimizadas (480w, 800w e original)
+docs/        imagens de prévia usadas neste README
 _headers     CSP, X-Frame-Options e demais cabeçalhos (Netlify / Cloudflare Pages)
 .nojekyll    para o GitHub Pages servir todos os arquivos
 ```
